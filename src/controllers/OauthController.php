@@ -25,13 +25,13 @@ class OauthController extends Controller
 
         $access_token = $connection->oauth("oauth/access_token", ["oauth_verifier" => $oauthVerifier]);
 
-        //save token in DB       		
+        //save token in DB
 		$plugin = SsTwitterFeed::getInstance();
         $settings = $plugin->getSettings();
-       
+
         $nsettings = array(
                         'access_token'  => $access_token['oauth_token'],
-                        'access_token_secret' => $access_token['oauth_token_secret'],                       
+                        'access_token_secret' => $access_token['oauth_token_secret'],
                     );
 
         Craft::$app->getPlugins()->savePluginSettings($plugin, $nsettings);
@@ -39,7 +39,3 @@ class OauthController extends Controller
 	}
 
 }
-?>
-
-
-

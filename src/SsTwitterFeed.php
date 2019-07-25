@@ -42,19 +42,19 @@ use yii\base\Event;
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
-    
+
 class SsTwitterFeed extends Plugin
 {
     // Static Properties
     // =========================================================================
-    
+
     /**
      * Static property that is an instance of this plugin class so that it can be accessed via
      * SsTwitterFeed::$plugin
      *
      * @var SsTwitterFeed
      */
-   
+
 
     // Public Properties
     // =========================================================================
@@ -65,13 +65,13 @@ class SsTwitterFeed extends Plugin
      * @var string
      */
     public $schemaVersion = '1.0.3';
-   
+
     public static $plugin;
     public static $CONSUMER_KEY = 'qhNHMB4B4dl4udJ0aGclECEK7';
     public static $CONSUMER_SECRET = "kgSKNDd7EJm5rgbMRdAVwL68piJLphea1XKT84pOkJn3PuKLZt";
     public static $OAUTH_PROCESSOR_URL = 'http://systemseeders.com/twitterapp/ss-twitter-feed.php?return_uri=';
-    public static $OAUTH_RET_URL = "/actions/ss-twitter-feed/oauth/callback";
-    
+    public static $OAUTH_RET_URL = "/actions/ss-twitter-feed/oauth/callback?";
+
 
     // Public Methods
     // =========================================================================
@@ -97,16 +97,7 @@ class SsTwitterFeed extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['siteActionTrigger1'] = 'ss-twitter-feed/default';
-            }
-        );
-
-        // Register our CP routes
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['cpActionTrigger1'] = 'ss-twitter-feed/default/do-something';
+                $event->rules['ssActionOauth'] = 'ss-twitter-feed/oauth/callback*';
             }
         );
 
