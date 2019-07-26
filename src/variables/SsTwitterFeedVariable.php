@@ -81,12 +81,13 @@ class SsTwitterFeedVariable
                   'profile_image_url' => isset( $row->user->profile_image_url )?$row->user->profile_image_url:null,
                   'url' => isset( $url )? $url: null,
                   'image_url' => isset( $row->entities->media[0]->media_url ) ? $row->entities->media[0]->media_url:null,
-                  'images'   => isset( $images )?$images:null,
-                  'retweet_count'  => isset( $row->retweet_count ) ? $row->retweet_count:null,
+                  'images' => isset( $images )?$images:null,
+                  'retweet_count' => isset( $row->retweet_count ) ? $row->retweet_count:null,
                   'favorite_count' => isset( $row->favorite_count ) ? $row->favorite_count:null,                     
-                  'created_at'     => self::time_ago( $row->created_at ),
-                  'retweet_link'  => 'https://twitter.com/intent/retweet?tweet_id='.$row->id_str,
-                  'favorite_link'  => 'https://twitter.com/intent/like?tweet_id='.$row->id_str,
+                  'created_at' => self::time_ago( $row->created_at ),
+                  'timestamp' => $row->created_at,
+                  'retweet_link' => 'https://twitter.com/intent/retweet?tweet_id='.$row->id_str,
+                  'favorite_link' => 'https://twitter.com/intent/like?tweet_id='.$row->id_str,
               );
           }
           
