@@ -95,7 +95,7 @@ class SsTwitterFeedVariable
 
     }
 
-    public function makeClickableLinks( $text ) {
+    public static function makeClickableLinks( $text ) {
         $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";     
         if(preg_match($reg_exUrl, $text, $url)) {            
             return preg_replace($reg_exUrl, "<a href='{$url[0]}' target='_blank'>{$url[0]}</a>", $text);
@@ -104,7 +104,7 @@ class SsTwitterFeedVariable
         }
     }
 
-    public function parseTweet( $text ) {
+    public static function parseTweet( $text ) {
 
       $text = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\" target=\"_blank\">\\2</a>", $text);
       $text = preg_replace("#(^|[\n ])((www|ftp)\.[^ \"\t\n\r< ]*)#", "\\1<a href=\"http://\\2\" target=\"_blank\">\\2</a>", $text);
@@ -114,12 +114,12 @@ class SsTwitterFeedVariable
       return $text;
     }
 
-    public function getUrl()
+    public static function getUrl()
     {        
        return SsTwitterFeed::$plugin->ssTwitterFeedService->getUrl( );
     }
     
-    public function time_ago($timestamp){
+    public static function time_ago($timestamp){
   
         $time_ago        = strtotime($timestamp);
         $current_time    = time();
