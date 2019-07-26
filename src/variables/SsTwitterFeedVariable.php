@@ -45,7 +45,7 @@ class SsTwitterFeedVariable
      * @param null $optional
      * @return string
      */
-    public function displayPost( $limit = '10', $exclude_retweets  = 'false' )
+    public static function displayPost( $limit = '10', $exclude_retweets  = 'false' )
     {
         $include_rts = 'true';
         if( $exclude_retweets == 'true' ) {
@@ -71,7 +71,7 @@ class SsTwitterFeedVariable
               } else {
                   $images = isset($row->extended_entities->media)?$row->extended_entities->media:$row->retweeted_status->extended_entities->media;
               }
-              $ss_tweet = $this->parseTweet( $row->full_text );
+              $ss_tweet = self::parseTweet( $row->full_text );
 
               $tweets[] = array(
                   'name' => isset( $row->user->name ) ? $row->user->name:null,
@@ -84,7 +84,7 @@ class SsTwitterFeedVariable
                   'images'   => isset( $images )?$images:null,
                   'retweet_count'  => isset( $row->retweet_count ) ? $row->retweet_count:null,
                   'favorite_count' => isset( $row->favorite_count ) ? $row->favorite_count:null,                     
-                  'created_at'     => $this->time_ago( $row->created_at ),
+                  'created_at'     => self::time_ago( $row->created_at ),
                   'retweet_link'  => 'https://twitter.com/intent/retweet?tweet_id='.$row->id_str,
                   'favorite_link'  => 'https://twitter.com/intent/like?tweet_id='.$row->id_str,
               );
